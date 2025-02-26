@@ -5,8 +5,8 @@ function App() {
 
   return (
     <>
-      <NavBar></NavBar>
-      <ItemListContainer text="Articulos serán añadidos pronto!"></ItemListContainer> 
+      <NavBar/>
+      <ItemListContainer text="Articulos serán añadidos pronto!"/>
     </>
   )
 }
