@@ -1,4 +1,5 @@
 import magdaLogo from '../assets/logo.jpg';
+import CartWidget from './CartWidget';
 
 function NavBar() {
 
@@ -9,11 +10,12 @@ function NavBar() {
           <a href="#" className="">
             <img src={magdaLogo} alt="logo magda3d" className='w-20 rounded-full'/>
           </a>
-          <ul className='flex gap-1.5'>
+          <ul className='flex gap-1.5 items-center'>
             <li><a className='hover:bg-pink-600 hover:text-white duration-150 p-2 rounded-xl' href="#">Figuras</a></li>
             <li><a className='hover:bg-pink-600 hover:text-white duration-150 p-2 rounded-xl' href="#">Llaveros</a></li>
             <li><a className='hover:bg-pink-600 hover:text-white duration-150 p-2 rounded-xl' href="#">Mates</a></li>
             <li><a className='hover:bg-pink-600 hover:text-white duration-150 p-2 rounded-xl' href="#">Macetas</a></li>
+            <li><CartWidget></CartWidget></li>
           </ul>
         </div>
       </nav>
