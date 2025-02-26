@@ -4,7 +4,6 @@ import CartWidget from './CartWidget';
 function NavBar() {
 
   return (
-    <>
       <nav className="font-[Nunito] text-lg text-black bg-pink-200">
         <div className="flex justify-between items-center w-9/10 m-auto pt-2 pb-2">
           <a href="#" className="">
@@ -19,7 +18,6 @@ function NavBar() {
           </ul>
         </div>
       </nav>
-    </>
   )
 }
   
