@@ -1,14 +1,17 @@
 import { useState, useEffect } from "react"
 import ItemList from "./ItemList";
+import { useParams } from "react-router";
 
 function ItemListContainer() {
   const [items, setItems] = useState([])
+  const {id} = useParams();
 
   useEffect(() => {
-    fetch('https://api.escuelajs.co/api/v1/products')
+    const urlProducts = id ? `https://api.escuelajs.co/api/v1/products?categoryId=${id}` : 'https://api.escuelajs.co/api/v1/products';
+    fetch(urlProducts)
     .then(response => response.json())
     .then(data => setItems(data));
-  }, [items])
+  }, [id])
 
 
   return (
