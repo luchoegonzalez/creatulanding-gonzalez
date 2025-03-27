@@ -9,9 +9,9 @@ function NavBar() {
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
-    fetch(`https://api.escuelajs.co/api/v1/categories`)
+    fetch(`https://fakestoreapi.com/products/categories`)
       .then(response => response.json())
-      .then(data => setCategories(data.slice(0, 5)));
+      .then(data => setCategories(data));
   }, []);
 
   function toggleMenu() {

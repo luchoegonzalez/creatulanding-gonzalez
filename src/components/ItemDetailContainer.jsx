@@ -8,7 +8,7 @@ export default function ItemDetailContainer() {
   const [item, setItem] = useState()
 
   useEffect(() => {
-    fetch(`https://api.escuelajs.co/api/v1/products/${id}`)
+    fetch(`https://fakestoreapi.com/products/${id}`)
     .then(response => response.json())
     .then(data => setItem(data));
   }, [id])
