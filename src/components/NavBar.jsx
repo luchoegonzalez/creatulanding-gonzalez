@@ -4,17 +4,6 @@ import magdaLogo from '../assets/logo.jpg';
 import CartWidget from './CartWidget';
 import CategoryList from './CategoryList';
 
-function MenuToggle({ isOpen, toggleMenu }) {
-  return (
-    <button 
-      className="p-2 focus:outline-none" 
-      onClick={toggleMenu}
-    >
-      <span className="text-2xl">{isOpen ? '✖' : '☰'}</span>
-    </button>
-  );
-}
-
 function NavBar() {
   const [isOpen, setIsOpen] = useState(false);
   const [categories, setCategories] = useState([]);
@@ -24,6 +13,10 @@ function NavBar() {
       .then(response => response.json())
       .then(data => setCategories(data.slice(0, 5)));
   }, []);
+
+  function toggleMenu() {
+    setIsOpen(!isOpen);
+  }
 
   return (
     <nav className="font-[Nunito] text-lg text-black bg-pink-200 fixed w-full top-0 shadow-md">
@@ -36,19 +29,24 @@ function NavBar() {
 
         {/* Menú en escritorio */}
         <div className="hidden md:flex md:items-center md:gap-6 md:ml-auto">
-          <CategoryList categories={categories} />
+          <CategoryList toggleMenu={toggleMenu} categories={categories} />
           <CartWidget />
         </div>
 
         {/* Menú y carrito en móvil */}
         <div className="flex items-center gap-4 md:hidden">
           <CartWidget />
-          <MenuToggle isOpen={isOpen} toggleMenu={() => setIsOpen(!isOpen)} />
+          <button 
+            className="p-2 focus:outline-none" 
+            onClick={toggleMenu}
+          >
+            <span className="text-2xl">{isOpen ? '✖' : '☰'}</span>
+          </button>
         </div>
 
         {/* Menú desplegable en móviles */}
         <div className={`absolute top-16 left-0 w-full bg-pink-200 md:hidden overflow-hidden transition-all duration-500 ease-in-out ${isOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}>
-          <CategoryList categories={categories} />
+          <CategoryList toggleMenu={toggleMenu} categories={categories} />
         </div>
       </div>
     </nav>
