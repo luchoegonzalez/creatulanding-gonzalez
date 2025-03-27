@@ -40,12 +40,12 @@ function NavBar() {
             className="p-2 focus:outline-none" 
             onClick={toggleMenu}
           >
-            <span className="text-2xl">{isOpen ? '✖' : '☰'}</span>
+            <span className="text-4xl inline-block w-4 h-4">{isOpen ? '✖' : '☰'}</span>
           </button>
         </div>
 
         {/* Menú desplegable en móviles */}
-        <div className={`absolute top-16 left-0 w-full bg-pink-200 md:hidden overflow-hidden transition-all duration-500 ease-in-out ${isOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}>
+        <div className={`absolute top-26 pb-4 left-0 w-full bg-pink-200 md:hidden overflow-hidden transition-all duration-500 ease-in-out ${isOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}>
           <CategoryList toggleMenu={toggleMenu} categories={categories} />
         </div>
       </div>

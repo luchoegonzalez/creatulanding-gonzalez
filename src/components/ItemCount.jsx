@@ -16,7 +16,7 @@ const ItemCount = ({ stock }) => {
   };
 
   return (
-    <div className="flex items-center space-x-4 mt-4">
+    <div className="flex items-center space-x-2">
       <button
         onClick={decrease}
         className="px-3 py-1 bg-gray-300 rounded-md disabled:opacity-50 hover:cursor-pointer hover:bg-gray-400 transition duration-200"
