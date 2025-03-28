@@ -4,6 +4,21 @@ import magdaLogo from '../assets/logo.jpg';
 import CartWidget from './CartWidget';
 import CategoryList from './CategoryList';
 
+const MenuIcon = () => (
+  <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <line x1="3" y1="12" x2="21" y2="12" />
+    <line x1="3" y1="6" x2="21" y2="6" />
+    <line x1="3" y1="18" x2="21" y2="18" />
+  </svg>
+);
+
+const CloseIcon = () => (
+  <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <line x1="18" y1="6" x2="6" y2="18" />
+    <line x1="6" y1="6" x2="18" y2="18" />
+  </svg>
+)
+
 function NavBar() {
   const [isOpen, setIsOpen] = useState(false);
   const [categories, setCategories] = useState([]);
@@ -40,12 +55,12 @@ function NavBar() {
             className="p-2 focus:outline-none" 
             onClick={toggleMenu}
           >
-            <span className="text-4xl inline-block w-4 h-4">{isOpen ? '✖' : '☰'}</span>
+            <span className="text-4xl">{isOpen ? <CloseIcon /> : <MenuIcon/>}</span>
           </button>
         </div>
 
         {/* Menú desplegable en móviles */}
-        <div className={`absolute top-26 pb-4 left-0 w-full bg-pink-200 md:hidden overflow-hidden transition-all duration-500 ease-in-out ${isOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}>
+        <div className={`absolute top-26 pb-4 left-0 w-full bg-pink-200 md:hidden overflow-hidden transition-all duration-200 ease-out ${isOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}>
           <CategoryList toggleMenu={toggleMenu} categories={categories} />
         </div>
       </div>
