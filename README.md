@@ -1,8 +1,6 @@
-# React + Vite
+# Ecommerce CoderHouse - Luciano Gonzalez
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## NavegaLasRutas+Gonzalez
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Utilizo [Fake Store API](https://fakestoreapi.com/) para los productos.
+Para simular el stock de un producto en ItemCount utilizo el propio ID del producto (aprovechando que es un numero), ya que la API no provee un numero de cantidad de stock.
