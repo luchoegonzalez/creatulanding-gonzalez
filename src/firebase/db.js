@@ -1,4 +1,4 @@
-import { getFirestore, collection, getDocs, query, where } from "firebase/firestore";
+import { getFirestore, collection, getDocs, query, where, doc, getDoc } from "firebase/firestore";
 import {app} from "./config.js";
 
 const db = getFirestore(app);
@@ -35,4 +35,18 @@ export const getProductsByCategory = async (category) => {
   });
 
   return items;
+}
+
+export const getProductById = async (id) => {
+  const docRef = doc(db, "products", id);
+  const docSnap = await getDoc(docRef);
+  let item = null;
+
+  if (docSnap.exists()) {
+    item = { id: docSnap.id, ...docSnap.data() }
+  } else {
+    console.log("El documento no existe");
+  }
+
+  return item;
 }
