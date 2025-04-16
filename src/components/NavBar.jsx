@@ -4,15 +4,15 @@ import magdaLogo from '../assets/logo.jpg';
 import CartWidget from './CartWidget';
 import CategoryList from './CategoryList';
 import { MenuIcon, CloseIcon } from './Icons';
+import { getCategories } from '../firebase/db';
 
 function NavBar() {
   const [isOpen, setIsOpen] = useState(false);
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
-    fetch(`https://fakestoreapi.com/products/categories`)
-      .then(response => response.json())
-      .then(data => setCategories(data));
+    getCategories()
+    .then(data => setCategories(data))
   }, []);
 
   function toggleMenu() {

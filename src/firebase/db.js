@@ -3,6 +3,17 @@ import {app} from "./config.js";
 
 const db = getFirestore(app);
 
+export const getCategories = async () => {
+  const querySnapshot = await getDocs(collection(db, "categories"));
+  const categories = [];
+
+  querySnapshot.forEach((doc) => {
+    categories.push({ id: doc.id, ...doc.data() });
+  });
+
+  return categories;
+}
+
 export const getProducts = async () => {
   const querySnapshot = await getDocs(collection(db, "products"));
   const items = [];
