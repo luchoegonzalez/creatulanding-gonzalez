@@ -54,8 +54,8 @@ export const getProductById = async (id) => {
 export const createBuyOrder = async (order) => {
   try {
     const docRef = await addDoc(collection(db, "orders"), order);
-    return `🦄 ¡Muchas gracias por tu compra! El ID de tu orden es: ${docRef.id}`;
+    return docRef.id;
   } catch (e) {
-    return `❌ Ha habido un error en tu compra: ${e.message}`;
+    console.log(`Ha habido un error en tu compra: ${e.message}`);
   }
 }

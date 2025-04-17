@@ -2,19 +2,13 @@ import { useState, useContext } from "react";
 import { CartContext } from "../context/CartContext";
 import { serverTimestamp } from "firebase/firestore";
 import { createBuyOrder } from "../firebase/db";
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
+import { useNavigate } from "react-router";
 
 export default function CheckoutForm() {
-  const { cart } = useContext(CartContext);
-  const [form, setForm] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    address: "",
-  });
-
-  const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-  };
+  const { cart, clearCart } = useContext(CartContext);
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -30,8 +24,23 @@ export default function CheckoutForm() {
       date: serverTimestamp()
     }
 
-    const mensaje = await createBuyOrder(order);
+    const id = await createBuyOrder(order);
 
+    if(id){
+      withReactContent(Swal).fire({
+        title: `¡Muchas gracias por tu compra! El ID de tu orden es: ${id}`,
+        icon: 'success',
+      })
+
+      clearCart();
+      navigate("/")
+
+    } else {
+      withReactContent(Swal).fire({
+        title: "Ha habido un error en tu compra",
+        icon: 'error',
+      })
+    }
   };
 
   const totalPrice = cart.reduce(
@@ -88,8 +97,6 @@ export default function CheckoutForm() {
           <input
             type="text"
             name="name"
-            value={form.name}
-            onChange={handleChange}
             required
             className="p-3 rounded-lg border border-pink-300 bg-white focus:outline-none focus:ring-2 focus:ring-pink-400"
             placeholder="Tu nombre"
@@ -101,8 +108,6 @@ export default function CheckoutForm() {
           <input
             type="email"
             name="email"
-            value={form.email}
-            onChange={handleChange}
             required
             className="p-3 rounded-lg border border-pink-300 bg-white focus:outline-none focus:ring-2 focus:ring-pink-400"
             placeholder="tucorreo@ejemplo.com"
@@ -114,8 +119,6 @@ export default function CheckoutForm() {
           <input
             type="tel"
             name="phone"
-            value={form.phone}
-            onChange={handleChange}
             required
             className="p-3 rounded-lg border border-pink-300 bg-white focus:outline-none focus:ring-2 focus:ring-pink-400"
             placeholder="011 1234 5678"
@@ -127,8 +130,6 @@ export default function CheckoutForm() {
           <input
             type="text"
             name="address"
-            value={form.address}
-            onChange={handleChange}
             required
             className="p-3 rounded-lg border border-pink-300 bg-white focus:outline-none focus:ring-2 focus:ring-pink-400"
             placeholder="Calle Falsa 123"
