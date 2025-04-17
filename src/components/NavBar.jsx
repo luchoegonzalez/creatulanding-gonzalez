@@ -32,6 +32,7 @@ function NavBar() {
         <div className="hidden md:flex md:items-center md:gap-6 md:ml-auto">
           <CategoryList toggleMenu={toggleMenu} categories={categories} />
           <CartWidget />
+
         </div>
 
         {/* Menú y carrito en móvil */}
