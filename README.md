@@ -24,10 +24,10 @@ Esta aplicación está construida con las siguientes herramientas y librerías:
 ## 🚀 Cómo iniciar el proyecto
 
 1. Clona el repositorio:
- ```bash
-   git clone https://github.com/tu-usuario/3d-print-shop.git
-   cd 3d-print-shop
-```
+  ```bash
+    git clone https://github.com/luchoegonzalez/creatulanding-gonzalez.git
+    cd creatulanding-gonzalez
+  ```
 
 3.  Instala las dependencias:
     
