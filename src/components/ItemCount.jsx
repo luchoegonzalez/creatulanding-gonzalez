@@ -1,7 +1,8 @@
 /* eslint-disable react/prop-types */
 import { useState, useEffect, useContext } from "react";
 import { CartContext } from "../context/CartContext";
-import { ToastContainer, toast } from "react-toastify";
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
 
 const ItemCount = ({ item }) => {
   const { addItem, getItemQuantity } = useContext(CartContext);
@@ -32,21 +33,38 @@ const ItemCount = ({ item }) => {
 
   const handleAddItem = () => {
     if (availableStock <= 0 || count <= 0) {
-      toast.error(`No hay más stock disponible de ${item.title}`, {
-        position: "bottom-right",
-        autoClose: 2000,
-        theme: "colored",
+      withReactContent(Swal).fire({
+        title: `No hay más stock disponible de ${item.title}`,
+        icon: 'error',
+        toast: true,
+        position: 'bottom-right',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        background: '#ffe4e6',
+        color: '#881337',
+        iconColor: '#f43f5e',
       });
+      
       return;
     }
 
     addItem(item, count);
 
-    toast.info(`Agregaste ${count} ${item.title} al carrito`, {
-      position: "bottom-right",
-      autoClose: 2000,
-      theme: "colored",
+    withReactContent(Swal).fire({
+      title: `Se han agregado ${count} ${item.title} al carrito`,
+      text: `Total: $${item.price * count}`,
+      icon: 'success',
+      toast: true,
+      position: 'bottom-right',
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: true,
+      background: '#fce7f3',
+      color: '#831843',
+      iconColor: '#ec4899',
     });
+    
 
     setCount(availableStock - count > 0 ? 1 : 0);
   };
@@ -79,8 +97,6 @@ const ItemCount = ({ item }) => {
       >
         Agregar al carrito
       </button>
-
-      <ToastContainer />
     </div>
   );
 };

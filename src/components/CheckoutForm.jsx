@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useContext } from "react";
 import { CartContext } from "../context/CartContext";
 import { serverTimestamp } from "firebase/firestore";
 import { createBuyOrder } from "../firebase/db";
@@ -26,21 +26,33 @@ export default function CheckoutForm() {
 
     const id = await createBuyOrder(order);
 
-    if(id){
+    if (id) {
       withReactContent(Swal).fire({
-        title: `¡Muchas gracias por tu compra! El ID de tu orden es: ${id}`,
+        title: `¡Muchas gracias por tu compra!`,
+        text: `El ID de tu orden es: ${id}`,
         icon: 'success',
-      })
-
+        confirmButtonText: 'Aceptar',
+        background: '#fce7f3',
+        color: '#831843',
+        iconColor: '#ec4899',
+        confirmButtonColor: '#ec4899',
+      });
+    
       clearCart();
-      navigate("/")
-
+      navigate("/");
     } else {
       withReactContent(Swal).fire({
         title: "Ha habido un error en tu compra",
+        text: "Por favor, intentá nuevamente más tarde.",
         icon: 'error',
-      })
+        confirmButtonText: 'Ok',
+        background: '#ffe4e6',
+        color: '#881337',
+        iconColor: '#f43f5e',
+        confirmButtonColor: '#f43f5e',
+      });
     }
+    
   };
 
   const totalPrice = cart.reduce(
