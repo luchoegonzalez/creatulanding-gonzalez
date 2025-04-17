@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 import CartItem from "./CartItem";
+import { Link } from "react-router";
 
 const Cart = ({ items }) => {
   const total = items.reduce(
@@ -24,6 +25,16 @@ const Cart = ({ items }) => {
             <span className="text-pink-800 text-xl font-bold">
               ${total.toFixed(2)}
             </span>
+          </div>
+
+          {/* 🚀 Botón al checkout */}
+          <div className="mt-6">
+            <Link
+              to="/checkout"
+              className="block w-full bg-pink-500 text-white text-center py-3 rounded-xl font-semibold hover:bg-pink-600 transition"
+            >
+              Ir al checkout
+            </Link>
           </div>
         </>
       )}

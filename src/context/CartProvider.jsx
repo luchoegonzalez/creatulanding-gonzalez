@@ -31,8 +31,13 @@ function CartProvider({ children }) {
     return cart.reduce((acc, item) => acc + item.quantity, 0);
   };
 
+  const getItemQuantity = (id) => {
+    const item = cart.find(prod => prod.id === id);
+    return item ? item.quantity : 0;
+  };
+
   return (
-    <CartContext.Provider value={{ addItem, removeItem, getQuantity, cart }}>
+    <CartContext.Provider value={{ addItem, removeItem, getQuantity, getItemQuantity, cart }}>
       {children}
     </CartContext.Provider>
   );
