@@ -16,7 +16,7 @@ export default function CheckoutForm() {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const form = e.target;
     const name = form[0].value;
@@ -30,7 +30,8 @@ export default function CheckoutForm() {
       date: serverTimestamp()
     }
 
-    createBuyOrder(order);
+    const mensaje = await createBuyOrder(order);
+
   };
 
   const totalPrice = cart.reduce(
