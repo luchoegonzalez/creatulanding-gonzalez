@@ -4,13 +4,11 @@ import { useState, useEffect } from "react";
 
 function CartProvider({ children }) {
   const [cart, setCart] = useState(() => {
-    // Cargar desde localStorage al iniciar
     const savedCart = localStorage.getItem("cart");
     return savedCart ? JSON.parse(savedCart) : [];
   });
 
   useEffect(() => {
-    // Guardar en localStorage cada vez que cambia el carrito
     localStorage.setItem("cart", JSON.stringify(cart));
   }, [cart]);
 
@@ -25,12 +23,16 @@ function CartProvider({ children }) {
     }
   };
 
+  const removeItem = (id) => {
+    setCart(prevCart => prevCart.filter(item => item.id !== id));
+  };
+
   const getQuantity = () => {
     return cart.reduce((acc, item) => acc + item.quantity, 0);
   };
 
   return (
-    <CartContext.Provider value={{ addItem, getQuantity, cart }}>
+    <CartContext.Provider value={{ addItem, removeItem, getQuantity, cart }}>
       {children}
     </CartContext.Provider>
   );

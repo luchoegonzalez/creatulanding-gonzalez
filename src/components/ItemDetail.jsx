@@ -1,23 +1,30 @@
 /* eslint-disable react/prop-types */
 import ItemCount from "./ItemCount";
 
-export default function ItemDetail({item}) {
+export default function ItemDetail({ item }) {
   return (
-      <div className="max-w-4xl mx-auto p-6 rounded-2xl flex flex-col md:flex-row items-center md:items-start md:gap-6 min-h-[500px]">
+    <div className="max-w-5xl mx-auto p-6 rounded-3xl bg-pink-50 shadow-md flex flex-col md:flex-row items-center md:items-start gap-10 mt-8">
+      {/* Imagen */}
+      <div className="w-full md:w-1/2 flex justify-center">
         <img
           src={item.images[0]}
           alt={item.title}
-          className="w-96 object-cover rounded-lg m-auto"
+          className="w-80 h-[400px] object-cover rounded-2xl border border-pink-200 shadow-sm transition-transform duration-300 hover:scale-105"
         />
-        <div className="mt-6 md:mt-0 md:ml-6 w-full md:w-1/2">
-          <h1 className="text-2xl font-bold text-gray-800">{item.title}</h1>
-          <p className="text-gray-500 mt-2 uppercase">{item.category}</p>
-          <p className="text-gray-600 mt-2">{item.description}</p>
-          <p className="text-gray-900 text-3xl font-semibold mt-4">${item.price.toFixed(2)}</p>
-          <div className="flex items-center mt-3 gap-4 flex-wrap">
-            <ItemCount item={item} />
-          </div>
+      </div>
+
+      {/* Información */}
+      <div className="w-full md:w-1/2">
+        <h1 className="text-3xl font-bold text-pink-800">{item.title}</h1>
+        <p className="text-pink-500 mt-1 uppercase tracking-wide text-sm">{item.category}</p>
+        <p className="text-pink-700 mt-4 leading-relaxed">{item.description}</p>
+        <p className="text-pink-600 text-3xl font-bold mt-6">${item.price.toFixed(2)}</p>
+
+        {/* ItemCount u otros controles */}
+        <div className="mt-5">
+          <ItemCount item={item} />
         </div>
       </div>
-  )
+    </div>
+  );
 }

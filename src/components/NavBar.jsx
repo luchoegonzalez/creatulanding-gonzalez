@@ -20,7 +20,7 @@ function NavBar() {
   }
 
   return (
-    <nav className="font-[Nunito] text-lg text-black bg-pink-200 fixed w-full top-0 shadow-md">
+    <nav className="font-[Nunito] text-lg text-black bg-pink-200 fixed w-full top-0 shadow-md z-50">
       <div className="flex justify-between items-center w-11/12 mx-auto py-3">
         
         {/* Logo */}
