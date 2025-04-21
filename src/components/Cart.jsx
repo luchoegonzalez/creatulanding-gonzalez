@@ -1,8 +1,11 @@
 /* eslint-disable react/prop-types */
 import CartItem from "./CartItem";
 import { Link } from "react-router";
+import { useContext } from "react";
+import { CartContext } from "../context/CartContext";
 
 const Cart = ({ items }) => {
+  const {clearCart} = useContext(CartContext);
   const total = items.reduce(
     (sum, item) => sum + item.price * item.quantity,
     0
@@ -27,8 +30,15 @@ const Cart = ({ items }) => {
             </span>
           </div>
 
-          {/* 🚀 Botón al checkout */}
           <div className="mt-6">
+            <button
+              onClick={clearCart}
+              className="w-full bg-red-100 text-red-700 py-3 rounded-xl font-semibold hover:bg-red-200 transition hover:cursor-pointer"
+            >
+              Vaciar carrito
+            </button>
+          </div>
+          <div className="mt-4">
             <Link
               to="/checkout"
               className="block w-full bg-pink-500 text-white text-center py-3 rounded-xl font-semibold hover:bg-pink-600 transition"
