@@ -1,4 +1,4 @@
-import { getFirestore, collection, getDocs, query, where, doc, getDoc, addDoc } from "firebase/firestore";
+import { getFirestore, collection, getDocs, query, where, doc, getDoc, addDoc, serverTimestamp } from "firebase/firestore";
 import {app} from "./config.js";
 
 const db = getFirestore(app);
@@ -53,7 +53,8 @@ export const getProductById = async (id) => {
 
 export const createBuyOrder = async (order) => {
   try {
-    const docRef = await addDoc(collection(db, "orders"), order);
+    const orderWithDate = {...order, date: serverTimestamp()}
+    const docRef = await addDoc(collection(db, "orders"), orderWithDate);
     return docRef.id;
   } catch (e) {
     console.log(`Ha habido un error en tu compra: ${e.message}`);

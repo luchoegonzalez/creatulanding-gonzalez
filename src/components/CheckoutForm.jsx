@@ -1,64 +1,19 @@
-import { useContext } from "react";
-import { CartContext } from "../context/CartContext";
-import { serverTimestamp } from "firebase/firestore";
-import { createBuyOrder } from "../firebase/db";
-import Swal from 'sweetalert2'
-import withReactContent from 'sweetalert2-react-content'
-import { useNavigate } from "react-router";
-
-export default function CheckoutForm() {
-  const { cart, clearCart } = useContext(CartContext);
-  const navigate = useNavigate();
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const form = e.target;
-    const name = form[0].value;
-    const email = form[1].value;
-    const phone = form[2].value;
-    const address = form[3].value;
-
-    const order = {
-      items: cart,
-      user: {name, email, phone, address},
-      date: serverTimestamp()
-    }
-
-    const id = await createBuyOrder(order);
-
-    if (id) {
-      withReactContent(Swal).fire({
-        title: `¡Muchas gracias por tu compra!`,
-        text: `El ID de tu orden es: ${id}`,
-        icon: 'success',
-        confirmButtonText: 'Aceptar',
-        background: '#fce7f3',
-        color: '#831843',
-        iconColor: '#ec4899',
-        confirmButtonColor: '#ec4899',
-      });
-    
-      clearCart();
-      navigate("/");
-    } else {
-      withReactContent(Swal).fire({
-        title: "Ha habido un error en tu compra",
-        text: "Por favor, intentá nuevamente más tarde.",
-        icon: 'error',
-        confirmButtonText: 'Ok',
-        background: '#ffe4e6',
-        color: '#881337',
-        iconColor: '#f43f5e',
-        confirmButtonColor: '#f43f5e',
-      });
-    }
-    
-  };
-
-  const totalPrice = cart.reduce(
-    (acc, item) => acc + item.price * item.quantity,
-    0
-  );
+/* eslint-disable react/prop-types */
+export default function CheckoutForm({ cart, totalPrice, handleSubmit, navigate }) {
+  if (cart.length === 0) {
+    return (
+      <div className="max-w-xl mx-auto p-6 bg-pink-50 rounded-2xl shadow-md text-center">
+        <h2 className="text-2xl font-bold text-pink-700 mb-2">Ups 😅</h2>
+        <p className="text-pink-600">Tu carrito está vacío, no podés finalizar la compra.</p>
+        <button
+          onClick={() => navigate("/")}
+          className="mt-6 bg-pink-500 text-white font-semibold py-2 px-4 rounded-xl hover:bg-pink-600 transition hover:cursor-pointer"
+        >
+          Volver al inicio
+        </button>
+      </div>
+    );
+  }
 
   return (
     <div className="max-w-3xl mx-auto p-6">
