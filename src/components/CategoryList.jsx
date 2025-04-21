@@ -1,9 +1,5 @@
 import { Link, useLocation } from "react-router";
 
-function capitalizeFirstLetter(string) {
-  return string.charAt(0).toUpperCase() + string.slice(1);
-}
-
 export default function CategoryList({ categories, toggleMenu }) {
   const location = useLocation();
   
